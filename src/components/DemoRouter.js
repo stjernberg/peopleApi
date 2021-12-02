@@ -1,9 +1,10 @@
-import React, { useState } from "react";
-import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import React from "react";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import styled from "styled-components/macro";
 import Header from "./Header";
 import CrudDemo from "./CrudDemo";
 import Details from "./CrudDemo";
+import Edit from "./Edit";
 
 const DemoRouter = () => {
   const Welcome = () => {
@@ -58,8 +59,8 @@ const DemoRouter = () => {
             <Route component={About} path="/about" />
             <Route component={CrudDemo} path="/crud" />
             <Route component={Details} path="/details/:id" />
+            <Route component={Edit} path="/edit/:id" />
             <Route component={NotFound} path="/404" />
-            {/* <Redirect to="/404" /> */}
           </PageWrapper>
         </Switch>
       </BrowserRouter>

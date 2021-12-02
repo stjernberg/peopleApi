@@ -1,18 +1,20 @@
 import React from "react";
 import axios from "axios";
-
 import { useHistory } from "react-router-dom";
 import { Button } from "react-bootstrap";
 
+//Displays the list of people and buttons to display details, delete or edit a specific person.
 const PeopleList = (props) => {
   const history = useHistory();
+
   const personDetails = () => {
     props.setShowDetails(!props.showDetails);
     history.push(`/details/${props.id}`);
   };
   const deletePerson = () => {
     const deleteURL = `https://localhost:44342/People/${props.id}`;
-    // useEffect(() => {
+
+    //Deletes a person with matched id, by making a delete request.
     const personToDelete = async () => {
       await axios
         .delete(deleteURL)
@@ -30,8 +32,9 @@ const PeopleList = (props) => {
         });
     };
     personToDelete();
-    // }, [deleteURL]);
   };
+
+  //Displays a table with all the people.
   return (
     <>
       <tr>
@@ -59,7 +62,14 @@ const PeopleList = (props) => {
           >
             Delete
           </Button>
-          <Button variant="warning">Edit</Button>
+          <Button
+            variant="warning"
+            onClick={() => {
+              history.push(`/edit/${props.id}`);
+            }}
+          >
+            Edit
+          </Button>
         </td>
       </tr>
     </>

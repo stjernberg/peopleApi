@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+
 import axios from "axios";
 import { Table, Button, Form } from "react-bootstrap";
 import Details from "./Details";
 import PeopleList from "./PeopleList";
-
 import { useForm } from "react-hook-form";
 
 import { Wrapper } from "../Styling";
@@ -12,7 +11,6 @@ import { Wrapper } from "../Styling";
 const CrudDemo = () => {
   const [people, setPeople] = useState([]);
   const [showDetails, setShowDetails] = useState(false);
- 
 
   const baseURL = "https://localhost:44342/People/";
 
@@ -44,30 +42,8 @@ const CrudDemo = () => {
     );
   };
 
+  //Maps the people array and send each object to Peoplelis, to be displayed on the page.
   const TableRow = () => {
-    // const deletePerson = (person) => {
-    //   const deleteURL = `https://localhost:44342/People/${person.id}`;
-    //   // useEffect(() => {
-    //   const personToDelete = async () => {
-    //     await axios
-    //       .delete(deleteURL)
-    //       .then((res) => {
-    //         console.log("RES:", res);
-    //         if (res.status === 202) {
-    //           console.log("Person is deleted!");
-    //           getPeople();
-    //         } else {
-    //           console.log("API ERROR");
-    //         }
-    //       })
-    //       .catch((err) => {
-    //         console.log("ERROR", err);
-    //       });
-    //   };
-    //   personToDelete();
-    //   // }, [deleteURL]);
-    // };
-
     return (
       <>
         <tbody>
@@ -75,7 +51,6 @@ const CrudDemo = () => {
             <PeopleList
               {...person}
               key={person.id}
-              // id={person.id}
               showDetails={showDetails}
               setShowDetails={setShowDetails}
               getPeople={getPeople}
@@ -86,6 +61,7 @@ const CrudDemo = () => {
     );
   };
 
+  //Adds new people to the people-array, ny posting the user's input.
   const AddPeople = () => {
     const {
       register,
@@ -93,21 +69,15 @@ const CrudDemo = () => {
       formState: { errors },
     } = useForm();
 
-    // const createId = () => {
-    //   return Math.floor(Math.random() * Date.now());
-    // };
-
     const onSubmit = (data) => {
       console.log("DATA: ", data);
       const newPerson = {
-        // id: createId(),
         firstName: data.firstName,
         lastName: data.lastName,
         email: data.email,
         title: data.title,
       };
 
-      // useEffect(() => {
       const savePerson = async () => {
         await axios
           .post(baseURL, newPerson)
@@ -121,9 +91,9 @@ const CrudDemo = () => {
           });
       };
       savePerson();
-      // });
     };
 
+    //Shows the form used for editing people.
     return (
       <>
         <h2 className="mt-3 text-center">Add new person</h2>
@@ -181,6 +151,7 @@ const CrudDemo = () => {
     );
   }; //End of AddPeople
 
+  //Returns the different components of the CrudDemo page.
   return (
     <Wrapper>
       <h1 className="mb-4 text-center">People list</h1>

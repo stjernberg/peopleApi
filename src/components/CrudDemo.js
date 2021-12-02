@@ -1,17 +1,14 @@
 import React, { useState, useEffect } from "react";
-
 import axios from "axios";
 import { Table, Button, Form } from "react-bootstrap";
 import Details from "./Details";
 import PeopleList from "./PeopleList";
 import { useForm } from "react-hook-form";
-
 import { Wrapper } from "../Styling";
 
 const CrudDemo = () => {
   const [people, setPeople] = useState([]);
   const [showDetails, setShowDetails] = useState(false);
-
   const baseURL = "https://localhost:44342/People/";
 
   useEffect(() => {

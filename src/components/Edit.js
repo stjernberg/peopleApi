@@ -41,7 +41,6 @@ const Edit = () => {
     register,
     handleSubmit,
     setValue,
-    reset,
     formState: { errors },
   } = useForm();
 
@@ -77,8 +76,9 @@ const Edit = () => {
     };
 
     editPerson();
-    // reset();
+    //go back to the people's list and refresh the page.
     history.push("/crud");
+    window.location.reload();
   };
 
   //Shows the form used to edit a person.
